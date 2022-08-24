@@ -3,7 +3,7 @@
 ## Database Used
 We are using a PostgreSQL database in order to make manipulation of the data more cohesive and simple in comparison to MongoDB, as we will want to perform many different joins and other operations in order to extract data for our ML model.
 
-ERD: ![img](FinalProjectERD_v2.png)
+ERD: ![img](FinalProjectERD_v3.png)
 
 ## Method Used to Link Database to Project
 We will link the PostgreSQL database to the project through Tableau, and use that to create our visualizations dashboard
