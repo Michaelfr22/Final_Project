@@ -4,6 +4,10 @@
 
 Team includes: Marceline Ackerman, Michael Friedman, and Ricardo Guerreiro.
 
+## Communication Protocols
+
+We are meeting Tuesdays, Thursdays, Saturdays, and Sundays through Slack and Zoom.
+
 ## Selected Topic
 
 ### Carbon Footprints in the United States, considering GDP and Population Size of each State
@@ -12,11 +16,11 @@ With the theme of Environmental Sustainability in mind, our team intends to cond
 
 ## Data Sources
 
-Original datasets were taken from [ClimateWatch.com](https://www.climatewatchdata.org/). Links below are the cleaned versions to be used in the analysis.
+Original datasets were taken from [ClimateWatch.com](https://www.climatewatchdata.org/). Data has been cleaned and loaded into a database, then exported to three usable sets. Links below are the cleaned versions to be used in the analysis.
 
- - [GDP by State from 1997-2020](https://github.com/Michaelfr22/Final_Project/blob/main/Resources/US_GDPbyState_Cleaned.csv)
- - [Population by State from 1990-2020](https://github.com/Michaelfr22/Final_Project/blob/main/Resources/US_PopbyState_Cleaned.csv)
- - [Historical US Emissions from 1990-2018](https://github.com/Michaelfr22/Final_Project/blob/main/Resources/clean_us_historical_emissions.csv)
+ - [Emissions vs GDP by State 1997-2018](https://github.com/Michaelfr22/Final_Project/blob/main/MergedTables/gdp_emissions.csv)
+ - [Emissions by Sector vs GDP and Pop by State 1997-2018](https://github.com/Michaelfr22/Final_Project/blob/main/MergedTables/gdp_pop_sector_emissions.csv)
+ - [Emissions vs Population by State 1997-2018](https://github.com/Michaelfr22/Final_Project/blob/main/MergedTables/pop_emissions.csv)
  
 ## Questions we hope to answer with the data
 
@@ -31,15 +35,20 @@ Original datasets were taken from [ClimateWatch.com](https://www.climatewatchdat
 
 ## Database Diagram
 
- - Four tables (CSV files) 
- - Three unique Foreign Keys: **Sector**, **State**, and **Year**
- - Datatypes for each key
+ - Eight tables in a PostgreSQL Database 
+   - state_pop: population by state from 1997-2018
+   - state_emissions: emissions by state from 1997-2018
+   - state_gdp: GDP by state from 1997-2018
+   - sector_emissions: Emissions by state by sector from 1997-2018
+   - pop_emissions: merged table of emissions vs population by state from 1997-2018
+   - gdp_emissions: merged table emissions vs GDP by state from 1997-2018
+   - gdp_pop_sector_emissions: master merged table of sector, population, and gdp by state from 1997-2018
 
-![FinalProjectERD_v1](https://user-images.githubusercontent.com/102773052/185803655-dafb3c2a-9216-4669-920f-30a2d3e2e4f3.png)
+![FinalProjectERD_v3](https://github.com/Michaelfr22/Final_Project/blob/main/Database/FinalProjectERD_v3.png)
 
 ## Machine Learning Model
 
-Our machine learning model will use Linear Regression as a starting point to explain the relationship between a continous dependent variable (GHG Emission) and an independent variable (GDP/Population Size). The model will also incorporate a Random Forest Classifier that will sample the data and ultimately simplify the decision-making process by building smaller, separate decision trees.
+As our data is not labeled with set outcomes, we are examining using a Random Forest Classification model to group states and sectors.
 
 ## Results
 
