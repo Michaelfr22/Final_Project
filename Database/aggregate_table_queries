@@ -1,0 +1,17 @@
+SELECT * FROM gdp_pop_sector_emissions;
+
+SELECT "Year", AVG("Population") as "Avg Pop", 
+		AVG("GDP") as "Avg GDP", 
+		AVG("All GHG") as "Avg GHG"
+INTO year_averages
+FROM gdp_pop_sector_emissions
+GROUP BY "Year"
+ORDER BY "Year" ASC;
+
+SELECT "Sector", "Year", AVG("All GHG") as "Average GHG"
+INTO sector_averages
+FROM gdp_pop_sector_emissions
+GROUP BY "Sector", "Year"
+ORDER BY "Year" ASC;
+
+SELECT * FROM sector_averages;
