@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Sector Emissions {% endblock %}</h1>
+    {% for emissions in db_row %}
+        <div class='db_row'>
+            <h3>#{{ emissions[0] }} - {{ emissions[1] }} BY {{ emissions[2] }}</h3>
+            <i><p>({{ emissions[3] }} pages)</p></i>
+            <p class='review'>{{ emissions[4] }}</p>
+            <i><p>Added {{ emissions[5] }}</p></i>
+        </div>
+    {% endfor %}
+{% endblock %}
+
