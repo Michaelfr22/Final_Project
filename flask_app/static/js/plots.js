@@ -1,5 +1,7 @@
 console.log("It's working!")
-var sector_emissions = document.currentScript.getAttribute('sector_emissions')
-console.log(sector_emissions)
+function myFunc(vars){
+    return console.log(vars)
+    // var data = document.currentScript.getAttribute('sector_emissions')
+    }
 
 
