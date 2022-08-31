@@ -8,6 +8,10 @@ Team includes: Marceline Ackerman, Michael Friedman, and Ricardo Guerreiro.
 
 We are meeting Tuesdays, Thursdays, Saturdays, and Sundays through Slack and Zoom.
 
+## Mid-Project Progress
+Google Slides below:
+https://docs.google.com/presentation/d/1-nu6R02VoQOIAPqIm7txoEy6xk4nNJbGHiTljbAuARw/edit#slide=id.p
+
 ## Selected Topic
 
 ### Carbon Footprints in the United States, considering GDP and Population Size of each State
@@ -27,11 +31,7 @@ Original datasets were taken from [ClimateWatch.com](https://www.climatewatchdat
  - Is there a correlation between State GDP and GHG Emissions levels?
  - Is there a correlation between population density and GHG Emission levels?
  - In the most recent observations, which States have the highest GHG Emission levels? The lowest?
- - Does a change in State GDP or population size over time significantly affect GHG Emission levels?
- - Does geographical location affect GHG Emission?
- - What are the key trends in US GHG Emissions since 1990?
- - What are a few other explanations for high GHG Emission levels? Low levels?
- - What GHG Emission levels can be predicted in the year of 2025? 2030 and beyond?
+ - Can we predict GHG Emissions through State Population and GDP?
 
 ## Database Diagram
 
@@ -52,7 +52,7 @@ As our data is not labeled with set outcomes, we are examining using a Random Fo
 
 ## Dashboard
 
-We will use a Flask App and Plotly Express in order to display our findings on a web page.
+We will use a Flask App, Tableau, & Plotly Express in order to display our findings on a web page.
 
 ## Results
 
