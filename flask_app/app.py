@@ -1,6 +1,6 @@
 import psycopg2
 from config import DB_HOST, DB_USER, DB_PASS, DB_PORT
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
@@ -25,7 +25,21 @@ def get_data(table_name):
 def index():
     return render_template('index.html')
 
+@app.route('/tableau')
+def tableau():
+    return render_template('tableau.html')
+
 @app.route('/analysis')
 def analysis():
     sector_emissions = get_data('sector_emissions')
-    return render_template('analysis.html', data = sector_emissions)
+    state_table = get_data('state_emissions')
+    return render_template('analysis.html', 
+        sector_data = sector_emissions, 
+        state_data = state_table)
+
+@app.route('/mlmodel')
+def model():
+    return render_template('model.html')
+
+if __name__ == "__main__":
+    app.run()
