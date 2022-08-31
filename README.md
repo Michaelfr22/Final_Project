@@ -50,6 +50,10 @@ Original datasets were taken from [ClimateWatch.com](https://www.climatewatchdat
 
 As our data is not labeled with set outcomes, we are examining using a Random Forest Classification model to group states and sectors.
 
+## Dashboard
+
+We will use a Flask App and Plotly Express in order to display our findings on a web page.
+
 ## Results
 
 TBD.
