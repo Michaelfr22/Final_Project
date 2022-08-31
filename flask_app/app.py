@@ -25,7 +25,19 @@ def get_data(table_name):
 def index():
     return render_template('index.html')
 
+@app.route('/tableau')
+def tableau():
+    return render_template('tableau.html')
+
 @app.route('/analysis')
 def analysis():
     sector_emissions = get_data('sector_emissions')
-    return render_template('analysis.html', data = sector_emissions)
+    master_table = get_data('gdp_pop_sector_emissions')
+    return render_template('analysis.html', 
+        sector_data = sector_emissions, 
+        master_data = master_table)
+
+@app.route('/mlmodel')
+def model():
+    return render_template('model.html')
+
