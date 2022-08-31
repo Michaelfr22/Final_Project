@@ -1,6 +1,6 @@
 import psycopg2
 from config import DB_HOST, DB_USER, DB_PASS, DB_PORT
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
@@ -41,3 +41,4 @@ def analysis():
 def model():
     return render_template('model.html')
 
+app.run()
