@@ -16,11 +16,17 @@
     <div class="row bg-dark">
         <div class="col-md-2 bg-dark">
           <div class="well bg-dark">
-            <h5>State</h5>
+            <h5>State 1</h5>
             <!-- <select id="selDataset"></select> -->
-            <select id="selDataset" onchange="optionChanged(this.value)"></select>
+            <select id="selDataset1" onchange="option1(this.value)"></select>
+          </div>
+          <div class="well bg-dark">
+            <h5>State 2</h5>
+            <!-- <select id="selDataset"></select> -->
+            <select id="selDataset2" onchange="option2(this.value)"></select>
           </div>
           <div id="line"></div>
+          <!-- <div id="sunburst"></div> -->
         </div>
       </div>
       </div>
@@ -28,14 +34,10 @@
     <div class="about" id="#"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script type="text/javascript">
-      var sectorVar = JSON.parse('{{ sector_data | tojson | safe }}');
-    </script> -->
     <script type="text/javascript">
-      var tableData = JSON.parse('{{ master_data | tojson | safe }}')
+      var tableData = JSON.parse('{{ state_data | tojson | safe }}')
     </script>
     <script src="../static/js/plots.js"></script>
-    <!-- <script src="../static/js/optionSelector.js"></script> -->
     
     
 </body>

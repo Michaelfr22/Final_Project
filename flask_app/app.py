@@ -32,13 +32,14 @@ def tableau():
 @app.route('/analysis')
 def analysis():
     sector_emissions = get_data('sector_emissions')
-    master_table = get_data('gdp_pop_sector_emissions')
+    state_table = get_data('state_emissions')
     return render_template('analysis.html', 
         sector_data = sector_emissions, 
-        master_data = master_table)
+        state_data = state_table)
 
 @app.route('/mlmodel')
 def model():
     return render_template('model.html')
 
-app.run()
+if __name__ == "__main__":
+    app.run()
