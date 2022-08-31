@@ -15,11 +15,11 @@ def get_db_connection():
 def get_data(table_name):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute(f'SELECT * FROM {table_name};')
+    cur.execute(f'select json_agg(t) from( select * FROM {table_name} ) t')
     db_table = cur.fetchall()
     cur.close()
     conn.close()
-    return jsonify(db_table)
+    return db_table
 
 @app.route('/')
 def index():
@@ -29,7 +29,3 @@ def index():
 def analysis():
     sector_emissions = get_data('sector_emissions')
     return render_template('analysis.html', data = sector_emissions)
-
-
-if __name__ == '__main__':
-    app.run()
