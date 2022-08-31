@@ -41,8 +41,8 @@ function init() {
 // Initialize the dashboard
 init();
 
-newState1 = "AL"
-newState2 = "AL"
+newState1 = "AK"
+newState2 = "AK"
 
 function option1(newState) {
   newState1 = newState;
@@ -137,7 +137,7 @@ function buildCharts(stateName1, stateName2) {
     x: years,
     y: ghgs2,
     mode: "lines+markers",
-    name: result2.State
+    name: result2.State,
   };
 
   lineData = [line1trace, line2trace];
