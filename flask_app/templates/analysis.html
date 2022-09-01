@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Interactive Analysis - US Emissions Data Analysis 1997-2018</title>
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  />
 </head>
 <body>
     <nav>
@@ -12,25 +16,28 @@
         <a href = "{{ url_for('model') }}">Machine Learning Model</a>
         <a href="#">About</a>
     </nav>
+  <div class="container">
+      <div class="jumbotron text-center">
+      <h1>Interactive Analysis</h1>
+      </div>
+  </div>
     <hr>
     <div class="row bg-dark">
         <div class="col-md-2 bg-dark">
-          <div class="well bg-dark">
-            <h5>State 1</h5>
+          <!-- <div class="well bg-dark"> -->
+            <h5><center>State 1</center></h5>
             <!-- <select id="selDataset"></select> -->
-            <select id="selDataset1" onchange="option1(this.value)"></select>
-          </div>
-          <div class="well bg-dark">
-            <h5>State 2</h5>
+            <center><select id="selDataset1" onchange="option1(this.value)"></select></center>
+            <h5><center>State 2</center></h5>
             <!-- <select id="selDataset"></select> -->
-            <select id="selDataset2" onchange="option2(this.value)"></select>
+            <center><select id="selDataset2" onchange="option2(this.value)"></select></center>
           </div>
-          <div id="line"></div>
-          <!-- <div id="sunburst"></div> -->
-        </div>
-      </div>
-      </div>
+        <!-- </div> -->
+          <div class="col-md-10">
+            <div id="line"></div>
+          </div>
     </div>
+          <!-- <div id="sunburst"></div> -->
     <div class="about" id="#"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -38,7 +45,5 @@
       var tableData = JSON.parse('{{ state_data | tojson | safe }}')
     </script>
     <script src="../static/js/plots.js"></script>
-    
-    
 </body>
 </html>
