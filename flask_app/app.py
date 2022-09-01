@@ -33,11 +33,13 @@ def tableau():
 def analysis():
     sector_emissions = get_data('sector_emissions')
     state_table = get_data('state_emissions')
+    merged_table = get_data('gdp_pop_sector_emissions')
     return render_template('analysis.html', 
         sector_data = sector_emissions, 
-        state_data = state_table)
+        state_data = state_table,
+        merged_data = merged_table)
 
-@app.route('/mlmodel')
+@app.route('/model')
 def model():
     return render_template('model.html')
 

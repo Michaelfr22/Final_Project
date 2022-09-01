@@ -34,30 +34,31 @@ function init() {
     // Use the first state from the list to build the initial plots
   var firstState = states[0];
   buildCharts(firstState, firstState);
-  // buildSunburst();
+  // buildSunbursts(firstState, firstState);
   
 }    
 
 // Initialize the dashboard
 init();
 
-newState1 = "AK"
-newState2 = "AK"
+newState1 = "AK";
+newState2 = "AK";
 
 function option1(newState) {
   newState1 = newState;
   rebuildCharts();
-}
+};
 
 function option2(newState) {
   newState2 = newState;
   rebuildCharts();
-}
+};
 
 function rebuildCharts() {
   // Fetch new data each time a new sample is selected
-  buildCharts(newState1, newState2)
-}
+  buildCharts(newState1, newState2);
+  // buildSunbursts(newState1, newState2);
+};
 
 
 // Function to build a line chart based on selection
@@ -65,11 +66,9 @@ function buildCharts(stateName1, stateName2) {
   // Set variables for lookup tables
   var items = tableData[0][0];
   var states = [];
-  var sectors = [];
   var years = [];
   var stateLookup = {};
   var yearLookup = {};
-  var sectorLookup = {};
 
   // Create a state list
   for (var item, i = 0; item = items[i++];) {
@@ -78,8 +77,8 @@ function buildCharts(stateName1, stateName2) {
       if (!(state in stateLookup)) {
           stateLookup[state] = 1;
           states.push(state);
-      }
-  }
+      };
+  };
 
   // Create a list of years
   for (var item, i = 0; item = items[i++];) {
@@ -88,38 +87,29 @@ function buildCharts(stateName1, stateName2) {
   if (!(year in yearLookup)) {
     yearLookup[year] = 1;
     years.push(year);
-  }
-}
+  };
+};
 
-  // Create a list of sectors
-  for (var item, i = 0; item = items[i++];) {
-  var sector = item.Sector;
-
-  if (!(sector in sectorLookup)) {
-    sectorLookup[sector] = 1;
-    sectors.push(sector);
-  }
-}
   // Create a variable that filters the first state.
   var resultArray1 = tableData[0][0].filter(statesObj => statesObj.State == stateName1);
   //   Create a variable that holds the first state in the array.
   var result1 = resultArray1[0];
-  console.log(resultArray1)
+  console.log(resultArray1);
 
   // Create a variable that filters the second state.
   var resultArray2 = tableData[0][0].filter(statesObj => statesObj.State == stateName2);
   //   Create a variable that holds the first state in the array.
   var result2 = resultArray2[0];
-  console.log(resultArray2)
+  console.log(resultArray2);
 
   // Fetch GHG values for filtered state
-  var ghgs1 = []
+  var ghgs1 = [];
   for (var item, i = 0; item = resultArray1[i++];) {
     var ghg = item.allghg;
     ghgs1.push(ghg);
   };
 
-  var ghgs2 = []
+  var ghgs2 = [];
   for (var item, i = 0; item = resultArray2[i++];) {
     var ghg = item.allghg;
     ghgs2.push(ghg);
@@ -160,59 +150,102 @@ function buildCharts(stateName1, stateName2) {
   // Use Plotly to plot the data with the layout. 
   Plotly.newPlot("line", lineData, lineLayout, config);
   
+};
 
-}
-// function buildSunburst() {
+// function buildSunbursts(stateName1, stateName2) {
 
-//   var items = tableData[0][0];
-
-//   // Fetch all states for sunburst plot
-//   var allStates = [];
-//   for (var item, i = 0; item = items[i++];) {
-//     var state = item.State;
-//     allStates.push(state)
-//   };
-
-//   // Fetch all sectors for sunburst plot
-//   var allSectors = [];
-//   for (var item, i = 0; item = items[i++];) {
-//     var sector = item.Sector;
-//     allSectors.push(sector)
-//   };
-
-//   // Concat state and sector for sunburst
-//   var stateSectors = []
-//   for (var item, i= 0; item = items[i++];) {
-//     var stateSector = item.State + " - " + item.Sector;
-//     stateSectors.push(stateSector) 
-//   }
-
-//   // Fetch all GHG values for sunburst plot
-//   var allghg = [];
-//   for (var item, i = 0; item = items[i++];) {
-//     var ghg = item.allghg;
-//     allghg.push(ghg)
-//   };
-
-//     // Create the trace for the sunburst chart
-//     var sunburstData = [{
-//       type: "sunburst",
-//       ids: stateSectors,
-//       labels: allSectors,
-//       parents: stateSectors,
-//       values: allghg,
-//       outsidetextfont: {size: 20, color: "#377eb8"},
-//       leaf: {opacity: 0.4},
-//       marker: {line: {width: 2}},
-//     }]
+//   var items = mergedData[0][0];
   
-//     var sunburstLayout = {
-//       margin: {l: 0, r: 0, b: 0, t: 0},
-//       width: 500,
-//       height: 500
-//     };
-     
-//     var config = {responsive: true}
+//   // Create a variable that filters the first state.
+//   var resultArray1 = items.filter(statesObj => statesObj.State == stateName1);
+//   //   Create a variable that holds the first state in the array.
+//   var result1 = resultArray1[0];
+//   console.log(resultArray1);
 
-//     Plotly.newPlot("sunburst", sunburstData, sunburstLayout, config)
+//   // Create a variable that filters the second state.
+//   var resultArray2 = items.filter(statesObj => statesObj.State == stateName2);
+//   //   Create a variable that holds the first state in the array.
+//   var result2 = resultArray2[0];
+//   console.log(resultArray2); 
+
+//   // Fetch list of values for filtered state
+ 
+//   var values1 = [];
+//   var ids1 = [];
+//   var parents1 = [];
+//   var labels1 = [];
+
+//   var values2 = [];
+//   var ids2 = [];
+//   var parents2 = [];
+//   var labels2 = [];
+
+//   for (var item, i = 0; item = resultArray1[i++];) {
+//     var label1 = item.Year;
+//     var parent1 = item.Sector;
+//     var id1 = item.State + " - " + item.Sector + " - " + item.Year;
+//     var value1 = item.allghg;
+//     values1.push(value1);
+//     labels1.push(label1);
+//     parents1.push(parent1);
+//     ids1.push(id1);
+//   };
+
+//   for (var item, i = 0; item = resultArray2[i++];) {
+//     var label2 = item.Year;
+//     var parent2 = item.Sector;
+//     var id2 = item.State + " - " + item.Sector + " - " + item.Year;
+//     var value2 = item.allghg;
+//     values2.push(value2);
+//     labels2.push(label2);
+//     parents2.push(parent2);
+//     ids2.push(id2);
+
+//   };
+
+//   console.log(values1);
+//   console.log(ids1);
+//   console.log(parents1);
+//   console.log(labels1);
+
+//   var sunData1 = [{
+//     type: "sunburst",
+//    //ids: ids1,
+//     values: values1,
+//     labels: labels1,
+//     parents: parents1,
+//     branchvalues: 'total'
+//     // outsidetextfont: {size: 20, color: "#377eb8"},
+//     // leaf: {opacity: 0.4},
+//     // marker: {line: {width: 2}},
+//   }];
+
+//   var sunData2 = [{
+//     type: "sunburst",
+//     //ids: ids2,
+//     values: values2,
+//     labels: labels2,
+//     parents: parents2,
+//     branchvalues: 'total'
+//     // outsidetextfont: {size: 20, color: "#377eb8"},
+//     // leaf: {opacity: 0.4},
+//     // marker: {line: {width: 2}},
+//   }];
+
+//   var sunLayout1 = {
+//     "margin": {"l": 0, "r": 0, "b": 0, "t": 0},
+//     "title": result1.State + " Sector Data"
+//   };
+
+//   var sunLayout2 = {
+//     "margin": {"l": 0, "r": 0, "b": 0, "t": 0},
+//     "title": result2.State + " Sector Data"
+//   };
+
+//   var config = {responsive: true};
+
+//   Plotly.newPlot('sunburst1', sunData1, sunLayout1, config);
+//   Plotly.newPlot('sunburst2', sunData2, sunLayout2, config);
 // }
+// ;
+

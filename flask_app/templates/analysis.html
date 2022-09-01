@@ -37,10 +37,14 @@
             <div id="line"></div>
           </div>
     </div>
-          <!-- <div id="sunburst"></div> -->
+          <!-- <div id="sunburst1"></div>
+          <div id="sunburst2"></div> -->
     <div class="about" id="#"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+      var mergedData = JSON.parse('{{ merged_data | tojson | safe }}')
+    </script>
     <script type="text/javascript">
       var tableData = JSON.parse('{{ state_data | tojson | safe }}')
     </script>
