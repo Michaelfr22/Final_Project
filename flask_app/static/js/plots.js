@@ -4,18 +4,22 @@ function init() {
   // Grab a reference to the dropdown select element
   var selector1 = d3.select("#selDataset1");
   var selector2 = d3.select("#selDataset2");
+  var selector3 = d3.select("#selDataset3");
   // Use the list of states to populate the select options
-  var lookup = {};
+  var stateLookup = {};
+  var yearLookup = {};
   var items = tableData[0][0];
   var states = [];
+  var years = [1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+                2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018];
   for (var item, i = 0; item = items[i++];) {
       var state = item.State;
-
-      if (!(state in lookup)) {
-          lookup[state] = 1;
+      if (!(state in stateLookup)) {
+          stateLookup[state] = 1;
           states.push(state);
       }
-  }
+      };
+  
   console.log(states)
   states.forEach((state) => {
     selector1
@@ -30,10 +34,18 @@ function init() {
       .text(state)
       .property("value", state);
   });
+  years.forEach((year) => {
+    selector3
+      .append("option")
+      .text(year)
+      .property("value", year);
+  });
+
 
     // Use the first state from the list to build the initial plots
   var firstState = states[0];
-  buildCharts(firstState, firstState);
+  var firstYear = years[0];
+  buildCharts(firstState, firstState, firstYear);
   // buildSunbursts(firstState, firstState);
   
 }    
@@ -43,6 +55,7 @@ init();
 
 newState1 = "AK";
 newState2 = "AK";
+yearSelect = 1997;
 
 function option1(newState) {
   newState1 = newState;
@@ -54,53 +67,98 @@ function option2(newState) {
   rebuildCharts();
 };
 
+function option3(newYear) {
+  yearSelect = newYear;
+  rebuildCharts();
+};
+
 function rebuildCharts() {
   // Fetch new data each time a new sample is selected
-  buildCharts(newState1, newState2);
+  buildCharts(newState1, newState2, yearSelect);
   // buildSunbursts(newState1, newState2);
 };
 
 
 // Function to build a line chart based on selection
-function buildCharts(stateName1, stateName2) {
+function buildCharts(stateName1, stateName2, selectedYear) {
   // Set variables for lookup tables
   var items = tableData[0][0];
+  var mergedItems = mergedData[0][0];
   var states = [];
   var years = [];
+  var sectors = [];
   var stateLookup = {};
   var yearLookup = {};
+  var sectorLookup = {};
 
   // Create a state list
   for (var item, i = 0; item = items[i++];) {
-      var state = item.State;
+    var state = item.State;
 
-      if (!(state in stateLookup)) {
-          stateLookup[state] = 1;
-          states.push(state);
-      };
+    if (!(state in stateLookup)) {
+      stateLookup[state] = 1;
+      states.push(state);
+    };
   };
 
   // Create a list of years
   for (var item, i = 0; item = items[i++];) {
-  var year = item.Year;
+    var year = item.Year;
 
-  if (!(year in yearLookup)) {
-    yearLookup[year] = 1;
-    years.push(year);
+    if (!(year in yearLookup)) {
+      yearLookup[year] = 1;
+      years.push(year);
+    };
   };
-};
+
+  // Create a list of sectors
+  for (var item, i = 0; item = mergedItems[i++];) {
+    var sector = item.Sector;
+
+    if (!(sector in sectorLookup)) {
+      sectorLookup[sector] = 1;
+      sectors.push(sector);
+    };
+  };
 
   // Create a variable that filters the first state.
-  var resultArray1 = tableData[0][0].filter(statesObj => statesObj.State == stateName1);
+  var resultArray1 = items.filter(statesObj => statesObj.State == stateName1);
   //   Create a variable that holds the first state in the array.
   var result1 = resultArray1[0];
   console.log(resultArray1);
 
   // Create a variable that filters the second state.
-  var resultArray2 = tableData[0][0].filter(statesObj => statesObj.State == stateName2);
+  var resultArray2 = items.filter(statesObj => statesObj.State == stateName2);
   //   Create a variable that holds the first state in the array.
   var result2 = resultArray2[0];
   console.log(resultArray2);
+
+  // Create a variable that filters the year
+  var yearArray = mergedItems.filter(yearObj => yearObj.Year == selectedYear);
+  console.log(yearArray);
+  // Create a variable that holds the first year in the array.
+  var yearResult = yearArray[0];
+  
+  // Create variables that filters the state from the merged sector table
+  var sectorArray1 = mergedItems.filter(statesObj => statesObj.State == stateName1)
+  var sectorArray2 = mergedItems.filter(statesObj => statesObj.State == stateName2)
+
+  // Fetch GHG values for filtered state and year
+  var sectorghgs1 = [];
+  for (var item, i = 0; item = sectorArray1[i++];) {
+    if (item.Year == yearResult.Year) {
+      var sectorghg = item.allghg;
+      sectorghgs1.push(sectorghg);
+    };
+  };
+
+  var sectorghgs2 = [];
+  for (var item, i = 0; item = sectorArray2[i++];) {
+    if (item.Year == yearResult.Year) {
+      var sectorghg = item.allghg;
+      sectorghgs2.push(sectorghg);
+    };
+  };
 
   // Fetch GHG values for filtered state
   var ghgs1 = [];
@@ -130,7 +188,7 @@ function buildCharts(stateName1, stateName2) {
     name: result2.State,
   };
 
-  lineData = [line1trace, line2trace];
+  var lineData = [line1trace, line2trace];
 
     //Create the layout for the line chart. 
   var lineLayout = {
@@ -141,111 +199,67 @@ function buildCharts(stateName1, stateName2) {
     yaxis: {
       title: "Megatons of CO2"
     },
-    title: result1.State + " vs " + result2.State + " Emissions 1997-2018"
+    title: result1.State + " vs " + result2.State + " Emissions 1990-2018"
   };
 
-  var config = {responsive: true};
+  var pieData = [{
+    values: sectorghgs1,
+    labels: sectors,
+    domain: {column: 0},
+    name: 'GHG Emissions',
+    text: result1.State,
+    textposition: 'inside',
+    hoverinfo: 'label+percent+name',
+    hole: .4,
+    type: 'pie',
+  },{
+    values: sectorghgs2,
+    labels: sectors,
+    domain: {column: 1},
+    name: 'GHG Emissions',
+    text: result2.State,
+    textposition: 'inside',
+    hoverinfo: 'label+percent+name',
+    hole: .4,
+    type: 'pie'
+  }
+];
+
+  var pieLayout = {
+    title: result1.State + " vs " + result2.State + " Emissions by Sector For " + yearResult.Year,
+    annotations: [
+      {
+        font: {
+          size: 36
+        },
+        showarrow: false,
+        text: result1.State,
+        x: 0.20,
+        y: 0.5
+      },
+      {
+        font: {
+          size: 36
+        },
+        showarrow: false,
+        text: result2.State,
+        x: 0.79,
+        y: 0.5
+      }
+    ],
+    height: 800,
+    width: 1200,
+    showlegend: true,
+    grid: {rows: 1, columns: 2}
+  };
+  
+
+  var config = {responsive: true, scrollZoom: true};
 
  
   // Use Plotly to plot the data with the layout. 
   Plotly.newPlot("line", lineData, lineLayout, config);
+  Plotly.newPlot("pie", pieData, pieLayout);
   
 };
-
-// function buildSunbursts(stateName1, stateName2) {
-
-//   var items = mergedData[0][0];
-  
-//   // Create a variable that filters the first state.
-//   var resultArray1 = items.filter(statesObj => statesObj.State == stateName1);
-//   //   Create a variable that holds the first state in the array.
-//   var result1 = resultArray1[0];
-//   console.log(resultArray1);
-
-//   // Create a variable that filters the second state.
-//   var resultArray2 = items.filter(statesObj => statesObj.State == stateName2);
-//   //   Create a variable that holds the first state in the array.
-//   var result2 = resultArray2[0];
-//   console.log(resultArray2); 
-
-//   // Fetch list of values for filtered state
- 
-//   var values1 = [];
-//   var ids1 = [];
-//   var parents1 = [];
-//   var labels1 = [];
-
-//   var values2 = [];
-//   var ids2 = [];
-//   var parents2 = [];
-//   var labels2 = [];
-
-//   for (var item, i = 0; item = resultArray1[i++];) {
-//     var label1 = item.Year;
-//     var parent1 = item.Sector;
-//     var id1 = item.State + " - " + item.Sector + " - " + item.Year;
-//     var value1 = item.allghg;
-//     values1.push(value1);
-//     labels1.push(label1);
-//     parents1.push(parent1);
-//     ids1.push(id1);
-//   };
-
-//   for (var item, i = 0; item = resultArray2[i++];) {
-//     var label2 = item.Year;
-//     var parent2 = item.Sector;
-//     var id2 = item.State + " - " + item.Sector + " - " + item.Year;
-//     var value2 = item.allghg;
-//     values2.push(value2);
-//     labels2.push(label2);
-//     parents2.push(parent2);
-//     ids2.push(id2);
-
-//   };
-
-//   console.log(values1);
-//   console.log(ids1);
-//   console.log(parents1);
-//   console.log(labels1);
-
-//   var sunData1 = [{
-//     type: "sunburst",
-//    //ids: ids1,
-//     values: values1,
-//     labels: labels1,
-//     parents: parents1,
-//     branchvalues: 'total'
-//     // outsidetextfont: {size: 20, color: "#377eb8"},
-//     // leaf: {opacity: 0.4},
-//     // marker: {line: {width: 2}},
-//   }];
-
-//   var sunData2 = [{
-//     type: "sunburst",
-//     //ids: ids2,
-//     values: values2,
-//     labels: labels2,
-//     parents: parents2,
-//     branchvalues: 'total'
-//     // outsidetextfont: {size: 20, color: "#377eb8"},
-//     // leaf: {opacity: 0.4},
-//     // marker: {line: {width: 2}},
-//   }];
-
-//   var sunLayout1 = {
-//     "margin": {"l": 0, "r": 0, "b": 0, "t": 0},
-//     "title": result1.State + " Sector Data"
-//   };
-
-//   var sunLayout2 = {
-//     "margin": {"l": 0, "r": 0, "b": 0, "t": 0},
-//     "title": result2.State + " Sector Data"
-//   };
-
-//   var config = {responsive: true};
-
-//   Plotly.newPlot('sunburst1', sunData1, sunLayout1, config);
-//   Plotly.newPlot('sunburst2', sunData2, sunLayout2, config);
-// }
-// ;
 
