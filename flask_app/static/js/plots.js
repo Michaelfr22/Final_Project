@@ -197,7 +197,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
       title: "Year"
     },
     yaxis: {
-      title: "Megatons of CO2"
+      title: "Megatons of GHG"
     },
     title: result1.State + " vs " + result2.State + " Emissions 1990-2018"
   };
