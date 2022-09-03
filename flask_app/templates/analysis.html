@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Interactive Analysis - US Emissions Data Analysis 1997-2018</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link
     rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  />
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <nav>
+    <div class = "topnav" id="myTopnav">
         <a href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('tableau') }}">Preliminary Analysis</a>
-        <a href = "{{ url_for('analysis') }}">Interactive Analysis</a>
+        <a href = "{{ url_for('analysis') }}" class="active">Interactive Analysis</a>
         <a href = "{{ url_for('model') }}">Machine Learning Model</a>
         <a href="#">About</a>
-    </nav>
+        <a href="javascript:void(0);" class="icon" onclick="navFunction()">
+          <i class="fa fa-bars"></i>
+        </a>  
+    </div>
   <div class="container">
       <div class="jumbotron text-center">
       <h1>Interactive Analysis</h1>
@@ -23,27 +28,43 @@
   </div>
     <hr>
     <div class="row bg-dark">
-        <div class="col-md-2 bg-dark">
-          <!-- <div class="well bg-dark"> -->
-            <h5><center>State 1</center></h5>
-            <!-- <select id="selDataset"></select> -->
+      <div class="analysis-first-column">
+            <h5><center><b>State 1</b></center></h5>
             <center><select id="selDataset1" onchange="option1(this.value)"></select></center>
-            <h5><center>State 2</center></h5>
-            <!-- <select id="selDataset"></select> -->
+      <!-- </div>
+      <div class="col-md-1 bg-dark"> -->
+            <h5><center><b>State 2</b></center></h5>
             <center><select id="selDataset2" onchange="option2(this.value)"></select></center>
-          </div>
-        <!-- </div> -->
-          <div class="col-md-10">
-            <div id="line"></div>
-          </div>
+      <!-- </div>
+      <div class="col-md-1 bg-dark"> -->
+            <h5><center><b>Year</b></center></h5>
+            <center><select id="selDataset3" onchange="option3(this.value)"></select></center>
+      <!-- </div> -->
     </div>
-          <!-- <div id="sunburst"></div> -->
+    <!-- <div class="row bg-dark"> --> 
+      <div class="analysis-second-column">
+        <div id="line"></div>
+        <div id="bubble"></div>
+      </div>  
+      <div class="analysis-third-column">
+        <div id="pie"></div>
+      </div>
+    </div>
+    </div>
+    </div>      
     <div class="about" id="#"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript">
+      var mergedData = JSON.parse('{{ merged_data | tojson | safe }}')
+    </script>
+    <script type="text/javascript">
       var tableData = JSON.parse('{{ state_data | tojson | safe }}')
     </script>
+        <script type="text/javascript">
+          var perCapita = JSON.parse('{{ per_capita | tojson | safe }}')
+    </script>
     <script src="../static/js/plots.js"></script>
+    <script src="../static/js/navbar.js"></script>
 </body>
 </html>

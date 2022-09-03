@@ -52,7 +52,16 @@ As our data is not labeled with set outcomes, we are examining using a Random Fo
 
 ## Dashboard
 
-We will use a Flask App, Tableau, & Plotly Express in order to display our findings on a web page.
+We built a Flask app using the following tools:
+ - HTML
+ - CSS
+ - Javascript
+ - Flask
+ - Plotly.js
+ - Tableau
+ - GitHub Embeds: https://emgithub.com/
+
+This will be deployed when complete using Heroku.
 
 ## Results
 
