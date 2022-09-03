@@ -250,7 +250,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
         showarrow: false,
         text: result1.State,
         x: 0.5,
-        y: 0.20
+        y: 0.80
       },
       {
         font: {
@@ -259,7 +259,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
         showarrow: false,
         text: result2.State,
         x: 0.5,
-        y: 0.80
+        y: 0.20
       }
     ],
     height: 800,
