@@ -220,7 +220,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
   var pieData = [{
     values: sectorghgs1,
     labels: sectors,
-    domain: {column: 0},
+    domain: {row: 0},
     name: 'GHG Emissions',
     text: result1.State,
     textposition: 'inside',
@@ -230,7 +230,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
   },{
     values: sectorghgs2,
     labels: sectors,
-    domain: {column: 1},
+    domain: {row: 1},
     name: 'GHG Emissions',
     text: result2.State,
     textposition: 'inside',
@@ -249,8 +249,8 @@ function buildCharts(stateName1, stateName2, selectedYear) {
         },
         showarrow: false,
         text: result1.State,
-        x: 0.20,
-        y: 0.5
+        x: 0.5,
+        y: 0.20
       },
       {
         font: {
@@ -258,14 +258,19 @@ function buildCharts(stateName1, stateName2, selectedYear) {
         },
         showarrow: false,
         text: result2.State,
-        x: 0.79,
-        y: 0.5
+        x: 0.5,
+        y: 0.80
       }
     ],
     height: 800,
     width: 1200,
     showlegend: true,
-    grid: {rows: 1, columns: 2}
+    legend: {
+      x: 0.85,
+      xanchor: 'right',
+      y: 0.5
+    },
+    grid: {rows: 2, columns: 1}
   };
 
   var bubbleData = [{

@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Home - US Emissions Data Analysis 1997-2018</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('index') }}">Home</a>
+    <div class = "topnav" id="myTopnav">
+        <a href="{{ url_for('index') }}" class="active">Home</a>
         <a href="{{ url_for('tableau') }}">Preliminary Analysis</a>
         <a href = "{{ url_for('analysis') }}">Interactive Analysis</a>
         <a href = "{{ url_for('model') }}">Machine Learning Model</a>
         <a href="#">About</a>
-    </nav>
+        <a href="javascript:void(0);" class="icon" onclick="navFunction()">
+          <i class="fa fa-bars"></i>
+        </a>  
+    </div>
     <hr>
     <div class="content">
         {% block content %} {% endblock %}
     </div>
     <div class="about" id="#"></div>
+    <script src="../static/js/navbar.js"></script>
 </body>
 </html>
 
