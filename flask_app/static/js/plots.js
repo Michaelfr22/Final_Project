@@ -7,7 +7,6 @@ function init() {
   var selector3 = d3.select("#selDataset3");
   // Use the list of states to populate the select options
   var stateLookup = {};
-  var yearLookup = {};
   var items = tableData[0][0];
   var states = [];
   var years = [1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
@@ -75,7 +74,6 @@ function option3(newYear) {
 function rebuildCharts() {
   // Fetch new data each time a new sample is selected
   buildCharts(newState1, newState2, yearSelect);
-  // buildSunbursts(newState1, newState2);
 };
 
 
@@ -84,6 +82,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
   // Set variables for lookup tables
   var items = tableData[0][0];
   var mergedItems = mergedData[0][0];
+  var capitaItems = perCapita[0][0];
   var states = [];
   var years = [];
   var sectors = [];
@@ -138,6 +137,9 @@ function buildCharts(stateName1, stateName2, selectedYear) {
   console.log(yearArray);
   // Create a variable that holds the first year in the array.
   var yearResult = yearArray[0];
+
+  // Create a variable that filters the perCapita table by Year
+  var capitaArray = capitaItems.filter(capitaObj => capitaObj.Year == selectedYear);
   
   // Create variables that filters the state from the merged sector table
   var sectorArray1 = mergedItems.filter(statesObj => statesObj.State == stateName1)
@@ -159,6 +161,19 @@ function buildCharts(stateName1, stateName2, selectedYear) {
       sectorghgs2.push(sectorghg);
     };
   };
+
+  // Fetch GHG and GDP per capita for every state during filtered year
+  var ghgPerCapita = [];
+  var gdpPerCapita = [];
+  var statePerCapita = [];
+  for (var item, i = 0; item = capitaArray[i++];) {
+    var state = item.State;
+    var ghg = item.ghg_per_capita;
+    var gdp = item.gdp_per_capita;
+    statePerCapita.push(state);
+    ghgPerCapita.push(ghg);
+    gdpPerCapita.push(gdp);
+  }
 
   // Fetch GHG values for filtered state
   var ghgs1 = [];
@@ -197,7 +212,7 @@ function buildCharts(stateName1, stateName2, selectedYear) {
       title: "Year"
     },
     yaxis: {
-      title: "Megatons of GHG"
+      title: "Metric Tons of CO2e"
     },
     title: result1.State + " vs " + result2.State + " Emissions 1990-2018"
   };
@@ -252,14 +267,46 @@ function buildCharts(stateName1, stateName2, selectedYear) {
     showlegend: true,
     grid: {rows: 1, columns: 2}
   };
-  
 
-  var config = {responsive: true, scrollZoom: true};
+  var bubbleData = [{
+    x: ghgPerCapita,
+    y: gdpPerCapita,
+    text: statePerCapita,
+    hovertemplate: '<b>%{text}</b>' +
+                    '<br><b>Emissions:</b> %{x}lbs of CO2e'+
+                    '<br><b>GDP:</b> %{y:$.2f}<extra></extra>',
+    mode: 'markers',
+    marker: {
+      size: ghgPerCapita,
+      sizeref: 2.0 * Math.max(...ghgPerCapita) / (60**2),
+      sizemode: 'area',
+      opacity: 0.6,
+      color: 'rgb(255, 65, 54)',
+      line: {
+        color: 'black',
+        width: 2
+      }
+    }
+  }];
+  
+  var bubbleLayout = {
+    title: 'GDP vs GHG Emissions Per Capita for ' + yearResult.Year,
+    showlegend: false,
+    xaxis: {
+      title: 'GHG Emissions Per Capita (Pounds of CO2e)'
+    },
+    yaxis: {
+      title: 'GDP Per Capita ($USD)'
+    }
+  }
+
+  var config = {responsive: true};
 
  
   // Use Plotly to plot the data with the layout. 
   Plotly.newPlot("line", lineData, lineLayout, config);
   Plotly.newPlot("pie", pieData, pieLayout);
+  Plotly.newPlot("bubble", bubbleData, bubbleLayout, config);
   
 };
 
