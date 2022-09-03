@@ -265,11 +265,11 @@ function buildCharts(stateName1, stateName2, selectedYear) {
     height: 800,
     width: 800,
     showlegend: true,
-    legend: {
-      x: 1,
-      xanchor: 'right',
-      y: 0.5
-    },
+    // legend: {
+    //   x: 1,
+    //   xanchor: 'right',
+    //   y: 0.5
+    // },
     grid: {rows: 2, columns: 1}
   };
 
