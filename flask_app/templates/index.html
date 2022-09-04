@@ -11,22 +11,40 @@
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <div class = "topnav" id="myTopnav">
-        <a href="{{ url_for('index') }}" class="active">Home</a>
-        <a href="{{ url_for('tableau') }}">Preliminary Analysis</a>
-        <a href = "{{ url_for('analysis') }}">Interactive Analysis</a>
-        <a href = "{{ url_for('model') }}">Machine Learning Model</a>
-        <a href="#">About</a>
-        <a href="javascript:void(0);" class="icon" onclick="navFunction()">
-          <i class="fa fa-bars"></i>
-        </a>  
-    </div>
-    <hr>
+    <nav class ="navbar navbar-default navbar-fixed-top">
+        <div class = "topnav" id="myTopnav">
+            <a href="{{ url_for('index') }}" class="active">Home</a>
+            <a href="{{ url_for('tableau') }}">Preliminary Analysis</a>
+            <a href = "{{ url_for('analysis') }}">Interactive Analysis</a>
+            <a href = "{{ url_for('model') }}">Machine Learning Model</a>
+            <a href="#">About</a>
+            <a href="javascript:void(0);" class="icon" onclick="navFunction()">
+            <i class="fa fa-bars"></i>
+            </a>  
+        </div>
+    </nav>
+        <div class="row bg-dark">
+            <div class="col-md-1 bg-dark">
+                <img class="planet" src="../static/planet.gif">
+            </div>
+            <div class="col-md-11 bg-dark">
+                <div class="container">
+                    <div class="jumbotron text-center">
+                        <h1>U.S Emissions Analysis 1997-2018</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="content">
         {% block content %} {% endblock %}
     </div>
     <div class="about" id="#"></div>
     <script src="../static/js/navbar.js"></script>
 </body>
+<footer>
+    <h6 class="instagram">Background Photo by:
+      <a href="https://www.instagram.com/kellymlacy/">Kelly</a>
+    </h6>
+  </footer>
 </html>
 

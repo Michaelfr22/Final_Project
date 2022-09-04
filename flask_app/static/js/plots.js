@@ -194,6 +194,9 @@ function buildCharts(stateName1, stateName2, selectedYear) {
     y: ghgs1,
     mode: "lines+markers",
     name: result1.State,
+    line:{
+      color: 'yellow'
+    }
 };
 
   var line2trace = {
@@ -201,6 +204,9 @@ function buildCharts(stateName1, stateName2, selectedYear) {
     y: ghgs2,
     mode: "lines+markers",
     name: result2.State,
+    line:{
+      color: 'green'
+    }
   };
 
   var lineData = [line1trace, line2trace];
@@ -209,12 +215,44 @@ function buildCharts(stateName1, stateName2, selectedYear) {
   var lineLayout = {
     xaxis: {
       tickvals: years,
-      title: "Year"
+      title: {
+        text:"Year",
+        font:{
+          color: "white"
+        },
+      },
+      tickfont:{
+        color: 'white'
+      },
+      zerolinecolor: 'white',
+      gridcolor: 'white'
     },
     yaxis: {
-      title: "Metric Tons of CO2e"
+      title: {
+        text:"Metric Tons of CO2e",
+        font:{
+          color: 'white'
+        },
+      },
+      tickfont:{
+        color:'white'
+      },
+      zerolinecolor: 'white',
+      gridcolor: 'white'
     },
-    title: result1.State + " vs " + result2.State + " Emissions 1990-2018"
+    title: {
+      text: result1.State + " vs " + result2.State + " Emissions 1990-2018",
+      font: {
+        color: 'white'
+      },
+    },
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    legend:{
+      font: {
+        color: 'white'
+      },
+    }
   };
 
   var pieData = [{
@@ -241,11 +279,17 @@ function buildCharts(stateName1, stateName2, selectedYear) {
 ];
 
   var pieLayout = {
-    title: result1.State + " vs " + result2.State + " Emissions by Sector For " + yearResult.Year,
+    title: {
+      text: result1.State + " vs " + result2.State + " Emissions by Sector For " + yearResult.Year,
+      font:{
+        color: 'white'
+      },
+    },
     annotations: [
       {
         font: {
-          size: 36
+          size: 36,
+          color: 'white'
         },
         showarrow: false,
         text: result1.State,
@@ -254,7 +298,8 @@ function buildCharts(stateName1, stateName2, selectedYear) {
       },
       {
         font: {
-          size: 36
+          size: 36,
+          color: 'white'
         },
         showarrow: false,
         text: result2.State,
@@ -265,11 +310,13 @@ function buildCharts(stateName1, stateName2, selectedYear) {
     height: 800,
     width: 800,
     showlegend: true,
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
     legend: {
-      x: 1,
-      xanchor: 'right',
-      y: 0.5
+      font:{
+        color: 'white'
     },
+  },
     grid: {rows: 2, columns: 1}
   };
 
@@ -295,14 +342,41 @@ function buildCharts(stateName1, stateName2, selectedYear) {
   }];
   
   var bubbleLayout = {
-    title: 'GDP vs GHG Emissions Per Capita for ' + yearResult.Year,
+    title: {
+      text: 'GDP vs GHG Emissions Per Capita for ' + yearResult.Year,
+      font:{
+        color: 'white'
+      },
+    },
     showlegend: false,
     xaxis: {
-      title: 'GHG Emissions Per Capita (Pounds of CO2e)'
-    },
+      title: {
+        text:'GHG Emissions Per Capita (Pounds of CO2e)',
+        font:{
+          color: 'white'
+        },
+      },
+      tickfont: {
+        color: 'white'
+      },
+      gridcolor: 'white',
+      zerolinecolor: 'white'
+  },
     yaxis: {
-      title: 'GDP Per Capita ($USD)'
-    }
+      title:{
+        text: 'GDP Per Capita ($USD)',
+        font:{
+          color: 'white'
+        },
+      },
+      tickfont:{
+        color: 'white'
+      },
+    gridcolor: 'white',
+    zerolinecolor: 'white'
+    },
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)'
   }
 
   var config = {responsive: true};
