@@ -17,7 +17,7 @@
         <a href="{{ url_for('tableau') }}">Preliminary Analysis</a>
         <a href = "{{ url_for('analysis') }}" class="active">Interactive Analysis</a>
         <a href = "{{ url_for('model') }}">Machine Learning Model</a>
-        <a href="#about">About</a>
+        <a href="/#about">About</a>
         <a href="javascript:void(0);" class="icon" onclick="navFunction()">
           <i class="fa fa-bars"></i>
         </a>  
@@ -28,6 +28,7 @@
       <h1>Interactive Analysis</h1>
       </div>
   </div>
+  <hr>
     <div class="row bg-dark">
       <div class="analysis-first-column">
             <h5 class="state"><center><b>State 1</b></center></h5>
@@ -43,17 +44,16 @@
       <!-- </div> -->
     </div>
     <!-- <div class="row bg-dark"> --> 
-      <div class="analysis-second-column">
+      <div class="analysis-second-column container">
         <div id="line"></div>
         <div id="bubble"></div>
       </div>  
-      <div class="analysis-third-column">
+      <div class="analysis-third-column container">
         <div id="pie"></div>
       </div>
     </div>
     </div>
     </div>      
-    <div class="about" id="about"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript">
