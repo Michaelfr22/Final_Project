@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
+  <nav class ="navbar navbar-default navbar-fixed-top">
     <div class = "topnav" id="myTopnav">
         <a href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('tableau') }}" class="active">Preliminary Analysis</a>
@@ -21,7 +22,7 @@
           <i class="fa fa-bars"></i>
         </a>  
     </div>
-    <hr>
+  </nav>
     <div class="content">
         {% block content %} {% endblock %}
     </div>
