@@ -6,12 +6,6 @@ body {
     background-size: cover;
   }
 
-.planet {
-  margin-top: 53px;
-  width: 300px;
-  height: auto;
-}
-
 .jumbotron {
   background: rgba(0,0,0,0);
   margin-bottom: 0px;
@@ -34,6 +28,7 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    font-weight: bold;
   }
 
   
@@ -46,7 +41,7 @@ body {
 /* Add an active class to highlight the current page */
 .topnav a.active {
     background-color: #04AA6D;
-    color: white;
+    color: #f2f2f2;
   }
 
 /* Right-aligned section inside the top navigation */
@@ -129,4 +124,89 @@ footer {
    position: fixed;
    bottom:0;
    width:100%;
+}
+
+.container {
+  background-color: #04AA6D;
+  color: #f2f2f2;
+  border: 4px solid darkgreen;
+  padding: 30px;
+}
+
+.front-page {
+  text-indent: 50px;
+}
+
+  /* Style columns in about section */
+.about-one {
+  text-align: center;
+  width: 33%;
+  padding: 0 0 0 0;
+  float: left;
+}
+
+.about-two {
+  text-align: center;
+  width: 33%;
+  padding: 0 0 0 0;
+  float: left;
+}
+
+.about-three {
+  text-align: center;
+  width: 33%;
+  padding: 0 0 0 0;
+  float: right;
+}
+
+@media only screen and (max-width: 960px) {
+
+  .about-one {
+      width: 100%;
+      padding-bottom: 10px;
+      float: none;
+  }
+
+  .about-two {
+      width: 100%;
+      padding-bottom: 10px;
+      float: none;
+  }
+  .about-three {
+      width: 100%;
+      padding-bottom: 10px;
+      float: none;
+  }
+}
+
+ /* unvisited link */
+ .about a:link {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 25px;
+  display: inline-block;
+  background-color: #333;
+  font-weight:bold;
+}
+
+.about a:hover {
+  color: #333;
+  background-color: #ddd;
+  font-weight:bold;
+}
+
+.about a:visited {
+  color: #f2f2f2;
+}
+
+hr {
+  clear: both;
+  visibility: hidden;
+}
+
+.planet {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

@@ -17,28 +17,131 @@
             <a href="{{ url_for('tableau') }}">Preliminary Analysis</a>
             <a href = "{{ url_for('analysis') }}">Interactive Analysis</a>
             <a href = "{{ url_for('model') }}">Machine Learning Model</a>
-            <a href="#">About</a>
+            <a href="#about">About</a>
             <a href="javascript:void(0);" class="icon" onclick="navFunction()">
             <i class="fa fa-bars"></i>
             </a>  
         </div>
     </nav>
+        <div class="row bg-dark"></div>
         <div class="row bg-dark">
-            <div class="col-md-1 bg-dark">
+            <!-- <div class="col-md-1 bg-dark">
                 <img class="planet" src="../static/planet.gif">
             </div>
-            <div class="col-md-11 bg-dark">
+            <div class="col-md-11 bg-dark"> -->
                 <div class="container">
+                    <hr>
                     <div class="jumbotron text-center">
-                        <h1>U.S Emissions Analysis 1997-2018</h1>
+                        <h1>U.S Emissions Analysis<br>
+                            1990-2018</h1>
                     </div>
                 </div>
+            <!-- </div> -->
+        </div>
+        <hr>
+    <div class="content">
+        <div class="container">
+            <h1 class="front-page">Overview</h1>
+            <p class="front-page">  More and more rapidly, the world is starting to notice the effects of global climate change. It's no longer a debate; it's undeniable. Historic flooding,
+                unprecedented drought, & devastating wildfires displacing millions of people are among some of the more drastic and noticable effects of climate change. Gases such as CO2,
+                Methane, and Nitrous Oxide are primary culprits in creating a "greenhouse effect" that traps more heat from the sun, steadily increasing the average temperatures
+                around the globe. These "greenhouse gases" are emitted in the greatest quantities by the most advanced nations, and the United States is no exception. In 2018 alone, the United
+                States emitted <b>6,677 Million Metric Tons of CO2e</b> as a whole.
+            </p>
+            <p class="front-page">    
+                    For our final project as part of the Rutgers University Data Analysis Boot Camp, our group chose to analyze the emission levels across the United States, finding
+                which states are the greatest polluters, which sectors within those states produce the largest amount of emissions, and measure those emissions against State population
+                and Gross Domestic Profit (GDP). Then, using Machine Learning, we hope to predict the emission levels going forward, based on past emissions, Population, and GDP.
+            </p>
+        </div>
+        <hr>
+        <div class="container">
+            <h1 class="front-page">Hypothesis</h1>
+            <p class="list">
+                Using the features GDP, Population, and past GHG emissions, we will try to0 predict future GHG emissions for each state and the sectors within those states.
+            </p>
+            <h3>Questions to Answer</h3>
+            <p class="list">
+                - What correlation, if any, exists between State GDP and GHG Emission levels?<br>
+                - What correlation, if any, exists between State Population and GHG Emission levels?<br>
+                - Over the course of 1990 to 2018, which States have the highest emissions? The lowest?<br>
+                - Can we predict GHG Emissions through State Population and GDP?
+            </p>
+        </div>
+        <hr>
+        <div class="container">
+            <h1 class="front-page">Results</h1>
+            <h3>Initial Analysis<br></h3>
+               <h5>Our initial analysis provided the following interesting & promising results:<br></h6>
+               <p class="list">
+                - States with larger populations tended to produce greater GHG emissions, but it was not a linear increase.<br>
+                - The highest emissions sector in every State is the Energy sector.<br>
+                - The highest polluting state in the country is Texas, followed by California, then Pennsylvania and Florida fighting for the Bronze medal.<br>
+                - The largest total GDP over 1997-2018 in the country is California at $198 Trillion, with Texas and New York an order of magnitude behind at $128 Trillion and 118 Trillion.<br>
+                - The highest population States in 2018 are California at 39M, Texas at 28M, & Florida at 28M, with New York close behind at 19M.<br>
+                </p>
+            <h3>Machine Learning<br></h3>
+                <h5>To test our hypothesis, we utilized three different Machine Learning models:<br></h6>
+                <h4>Linear Regression<br></h4>
+                <p class="list">
+                    - Using Linear Regression, we attempted to find a correlation between GDP, Population, and GHG emissions.<br>
+                    - Due to the ever-increasing nature of these features, we were unable to find any useful correlation that was not already obvious.<br>
+                    - From here, we moved on to unsupervised models.<br>
+                </p>
+                <h4>Random Forest Classifier<br></h4>
+                <p class="list">
+                    - The model was trained on data aggregated as averages, in order to scale each feature and account for differences in land size.<br>
+                    - The training score was 0.95, a promising result, but the inital test was only 0.69. Still decent, but not reliable.<br>
+                    - When running the trained model on our existing data, we found it was unusable on real data, with a negative testing score.<br>
+                </p>
+                <h4>K-Means Clustering<br></h4>
+                <p class="list">
+                    - We used the Elbow Method to determine how many clusters to target using the model, resulting in 4 ideally.<br>
+                    - While this model was not wholly successful, it did help us come to the conclusion that our hypothesis was null.<br>
+                    - Clustering provided no correlation between Population and GHG or GDP and GHG.<br>
+                </p>
+                <h3>Conclusion<br></h3>
+                <p class="list">
+                    We will need more data, with ideally other features, in order to properly predict GHG Emissions going forward.<br>
+                </p>
+                <h4>Possible Improvements:<br></h4>
+                <p class="list">
+                    - Take into account political leanings for each State.<br>
+                    - Find what sectors in each State produce the highest GDP.<br>
+                    - Find what sectors in each State receive the most funding.<br>
+                    - Take into account the irregularities that COVID-19 may have caused in the data.<br>
+                </p>
+        </div>
+    </div>
+    <hr>
+
+
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2>About the Team</h2>
+            </div>
+            <div class="row bg-dark">
+                <div class="about-one">
+                    <h4>Marceline Ackerman</h4>
+                    <h5><a class="about-link" href="https://github.com/marcelineackerman" title="Go to Marceline's Github">Github</a></h5>
+                    <h5><a class="about-link" href="https://www.linkedin.com/in/marceline-ackerman-37526473/" title="Go to Marceline's Linkedin">Linkedin</a></h5>
+                </div>
+                <div class="about-two">
+                    <h4>Ricardo Guerreiro</h4>
+                    <h5><a class="about-link" href="https://github.com/ricardoguerreiro92" title="Go to Ricardo's Github">Github</a></h5>
+                    <h5><a class="about-link" href="https://www.linkedin.com/in/ricardo-guerreiro-b1704519a/" title="Go to Ricardo's Linkedin">Linkedin</a></h5>
+                </div>
+                <div class="about-three">
+                    <h4>Michael Friedman</h4>
+                </div>
+            </div>
+            <div class="row bg-dark">
+                <img class="planet" src="../static/planet.gif">
             </div>
         </div>
-    <div class="content">
-        {% block content %} {% endblock %}
-    </div>
-    <div class="about" id="#"></div>
+    </section>
     <script src="../static/js/navbar.js"></script>
 </body>
 <footer>
