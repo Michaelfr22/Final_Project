@@ -4,7 +4,7 @@
 
 Team includes: Marceline Ackerman, Michael Friedman, and Ricardo Guerreiro.
 
-### Overview
+## Overview
 
 More and more rapidly, the world is starting to notice the effects of global climate change. It's no longer a debate; it's undeniable. Historic flooding,
 unprecedented drought, & devastating wildfires displacing millions of people are among some of the more drastic and noticable effects of climate change. Gases such as CO2,
